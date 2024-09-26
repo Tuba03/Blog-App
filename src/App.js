@@ -9,22 +9,16 @@ import Signup from './components/pages/Signup';
 import About from './components/pages/About';
 import Services from './components/pages/Services';
 import ProfilePage from './components/pages/ProfilePage';
-
 import Userdashboard from './components/pages/user-routes/Userdashboard';
 import Profileinfo from './components/pages/user-routes/Profileinfo';
 import NewFeed from './components/NewFeed';
-
 import Settings from './components/pages/Settings';
 import ForgotPassword from './components/ForgotPassword';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
-import './styles/light.css';
-import './styles/dark.css';
+import { AuthProvider } from './context/AuthContext';
 
 const AppContent = () => {
-  const { theme } = useTheme();
-
   return (
-    <div className={`app-container ${theme}-theme`}>
+    <div className="app-container">
       <Routes>
         <Route path="/" element={<Base />} />
         <Route path="/Home" element={<Home />} />
@@ -38,10 +32,6 @@ const AppContent = () => {
         <Route path="/NewFeed" element={<NewFeed />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/ForgotPassword" element={<ForgotPassword />} />
-        {/* <Route path="/user" element={<PrivateRoute />}>
-          <Route path="dashboard" element={<Userdashboard />} />
-          <Route path="profile-info" element={<Profileinfo />} />
-        </Route> */}
       </Routes>
     </div>
   );
@@ -49,11 +39,11 @@ const AppContent = () => {
 
 function App() {
   return (
-    <ThemeProvider>
+    <AuthProvider>
       <BrowserRouter>
         <AppContent />
       </BrowserRouter>
-    </ThemeProvider>
+    </AuthProvider>
   );
 }
 

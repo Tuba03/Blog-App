@@ -22,16 +22,16 @@ const API_BASE_URL = 'http://100.28.49.102:9090';
 export const signUp = async (userDto) => {
     try {
         const formData = new FormData();
-        
+
         // Append the userDto object as a JSON string
         formData.append('userDto', JSON.stringify(userDto));
-        
+
         // Append the profile picture file (if any)
         if (userDto.profilepic && userDto.profilepic !== 'null') {
             const file = await fetch(userDto.profilepic).then(r => r.blob());
             formData.append('image', file, 'profilepic.jpg');
         }
-        
+
         // Make the POST request
         const response = await axios.post(`${API_BASE_URL}/api/v1/auth/register`, formData, {
             headers: {
@@ -39,43 +39,33 @@ export const signUp = async (userDto) => {
                 'Accept': '/**'
             },
         });
-
+        
+        const data = await response.json();
+        localStorage.setItem('authToken', data.token); // Save the token
         return response.data; // Return the response data from the server
     } catch (error) {
         console.error('Error during signup:', error);
         throw error;
     }
+
 };
 
-// src/services/user-service.js
 export const login = async (username, password) => {
-    try {
-        const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-            credentials: 'include',
-        });
+    const response = await fetch(`${API_BASE_URL}/api/v1/auth/login`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+    });
 
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.message || 'Network response was not ok');
-        }
-
-        const data = await response.json();
-        if (data.token) {
-            localStorage.setItem('authToken', data.token);
-        } else {
-            throw new Error('Login successful but no token received');
-        }
-
-        return data;
-    } catch (error) {
-        console.error('Error:', error);
-        throw error;
+    if (!response.ok) {
+        throw new Error('Login failed');
     }
+
+    const data = await response.json();
+    localStorage.setItem('authToken', data.token); // Save the token
+    return data;
 };
 
 
@@ -91,30 +81,30 @@ export const login = async (username, password) => {
 //         body: JSON.stringify({ username, password }),
 //         credentials: 'include' // Include credentials if needed
 //       });
-  
+
 //       if (!response.ok) {
 //         const errorText = await response.text();
 //         throw new Error(`Network response was not ok: ${errorText}`);
 //       }
-  
+
 //       const data = await response.json();
-  
+
 //       // Assuming the token is in the response
 //       const token = data.token;
 //       // Store the token in local storage or a state management library
 //       localStorage.setItem('authToken', token);
-  
+
 //       return data;
 //     } catch (error) {
 //       console.error('Fetch error:', error);
 //       throw error;
 //     }
 //   };
-  
-  
-  
-  
-  
+
+
+
+
+
 
 
 //  /api/password/forget
