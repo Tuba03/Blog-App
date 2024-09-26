@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProfileHeader from './ProfileHeader'; // Adjust the path as necessary
+import ProfileContent from './ProfileContent'; // Adjust the path as necessary
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -9,30 +11,38 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchProfileData = async () => {
-      const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhYmNAMTIzLmNvbSIsImV4cCI6MTcyNzM4MTAyMywiaWF0IjoxNzI3MzYzMDIzfQ.UaOrmrVhLb8tm8uDMI5nb90Te3bXmCRtylckrHajSyfEgXgNkhLSR2g_8TXNWwcStHcMu5JkfNaFLPluX38pXw'; // Replace with your token
+      const authToken = localStorage.getItem("authToken");
 
       try {
         const userResponse = await axios.get('http://100.28.49.102:9090/api/users/', {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': '*/*',
+            'Authorization': `Bearer ${authToken}`,
           }
         });
 
-        setUser(userResponse.data);
+        // Create a new user object
+        const transformedUser = {
+          picture: userResponse.data.profilepic ?? 'https://via.placeholder.com/150',
+          name: userResponse.data.name,
+          bio: user.about ?? '', // Replace with dynamic bio if available
+          postsCount: userResponse.data.totalPosts,
+          followersCount: userResponse.data.followersCount ?? 0,
+          followingCount: userResponse.data.followingCount ?? 0,
+        };
+
+        setUser(transformedUser);
 
         const postsResponse = await axios.get('http://100.28.49.102:9090/api/users/posts/', {
           headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': '*/*',
+            'Authorization': `Bearer ${authToken}`,
           }
         });
 
         setPosts(postsResponse.data);
-        setLoading(false);
       } catch (err) {
         console.error(err); // Log the error
         setError(err.response ? err.response.data.message : 'Error fetching profile data');
+      } finally {
         setLoading(false);
       }
     };
@@ -40,30 +50,22 @@ const ProfilePage = () => {
     fetchProfileData();
   }, []);
 
+  // Default posts to display if API call fails or returns empty
+  const defaultPosts = [
+    { id: 1, title: 'My first post', excerpt: 'This is a summary of my first post.' },
+    { id: 2, title: 'Another day in Backend Development', excerpt: 'Here’s a bit about my day.' },
+  ];
+
+  // Use fetched posts if available, otherwise use default posts
+  const displayPosts = posts.length > 0 ? posts : defaultPosts;
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      {user && (
-        <div>
-          <h1>{user.name}</h1>
-          <img src={user.picture} alt={user.name} style={{ width: 150, height: 150, borderRadius: '50%' }} />
-          <p>{user.bio}</p>
-          <p>Posts: {user.postsCount}</p>
-          <p>Followers: {user.followersCount}</p>
-          <p>Following: {user.followingCount}</p>
-        </div>
-      )}
-      <h2>Posts</h2>
-      <ul>
-        {posts.map(post => (
-          <li key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.excerpt}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="profile-page">
+      {user && <ProfileHeader user={user} />}
+      <ProfileContent posts={displayPosts} />
     </div>
   );
 };
