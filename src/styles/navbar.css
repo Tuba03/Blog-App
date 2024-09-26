@@ -1,0 +1,20 @@
+.dropdown-menu-custom {
+    text-align: center; /* Center-align the text */
+    width: 150px; /* Adjust the width as needed */
+    padding: 0; /* Remove default padding */
+}
+
+.dropdown-item-custom {
+    padding: 5px 10px; /* Adjust padding for a tighter fit */
+}
+
+/* Optional: Adjust divider styling */
+.dropdown-divider {
+    margin: 0; /* Remove margin */
+}
+
+/* Optional: Style for the logout divider */
+.dropdown-divider {
+    border-top: 1px solid #ccc; /* Add a light line */
+    margin: 5px 0; /* Add spacing */
+}

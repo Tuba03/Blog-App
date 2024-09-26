@@ -15,10 +15,14 @@ import NewFeed from './components/NewFeed';
 import Settings from './components/pages/Settings';
 import ForgotPassword from './components/ForgotPassword';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+import './styles/light.css';
+import './styles/dark.css';
 
 const AppContent = () => {
+  const { theme } = useTheme();
   return (
-    <div className="app-container">
+    <div className={`app-container ${theme}-theme`}>
       <Routes>
         <Route path="/" element={<Base />} />
         <Route path="/Home" element={<Home />} />
@@ -40,9 +44,11 @@ const AppContent = () => {
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <AppContent />
-      </BrowserRouter>
+      <ThemeProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
+      </ThemeProvider>
     </AuthProvider>
   );
 }

@@ -28,7 +28,6 @@ const Login = () => {
 
         try {
             const data = await login(loginDetail.username, loginDetail.password);
-            console.log('User Login successful:', data);
             authLogin(); // Call the login function to update context
             navigate('/home');
         } catch (error) {

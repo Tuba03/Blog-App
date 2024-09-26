@@ -1,6 +1,11 @@
 // src/components/CustomNavbar.js
 import React, { useState } from 'react';
 import { NavLink as ReactLink } from 'react-router-dom';
+import '../styles/navbar.css';
+import { FaUser } from 'react-icons/fa';
+import ThemeToggle from './ThemeToggle'; 
+import { useAuth } from '../context/AuthContext';
+
 import {
   Collapse,
   Navbar,
@@ -14,8 +19,6 @@ import {
   DropdownMenu,
   DropdownItem,
 } from 'reactstrap';
-import { FaUser } from 'react-icons/fa';
-import { useAuth } from '../context/AuthContext'; // Import the Auth context
 
 function CustomNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,9 +41,6 @@ function CustomNavbar() {
           <NavItem>
             <NavLink tag={ReactLink} to="../Services">Services</NavLink>
           </NavItem>
-          <NavItem>
-            <NavLink tag={ReactLink} to="../Profile">Profile</NavLink>
-          </NavItem>
 
           <UncontrolledDropdown nav inNavbar>
             <DropdownToggle nav caret>
@@ -57,15 +57,37 @@ function CustomNavbar() {
         <Nav navbar>
           {isLoggedIn ? (
             <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
+            <DropdownToggle nav caret className='m-0'>
                 <FaUser style={{ fontSize: '20px' }} />
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem tag={ReactLink} to="../Settings">Settings</DropdownItem>
+            </DropdownToggle>
+            <DropdownMenu right className="dropdown-menu-custom">
+                <DropdownItem 
+                    tag={ReactLink} 
+                    to="../Profile" 
+                    className="dropdown-item-custom" 
+                    style={{ padding: '5px 10px', textAlign: 'center' }} // Inline style
+                >
+                    Profile
+                </DropdownItem>
+                <DropdownItem 
+                    tag={ReactLink} 
+                    to="../Settings" 
+                    className="dropdown-item-custom" 
+                    style={{ padding: '5px 10px', textAlign: 'center' }} // Inline style
+                >
+                    Settings
+                </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem onClick={logout}>Logout</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+                <DropdownItem 
+                    onClick={logout} 
+                    className="dropdown-item-custom" 
+                    style={{ padding: '5px 10px', textAlign: 'center' }} // Inline style
+                >
+                    Logout
+                </DropdownItem>
+            </DropdownMenu>
+        </UncontrolledDropdown>
+        
           ) : (
             <>
               <NavItem>
@@ -76,6 +98,9 @@ function CustomNavbar() {
               </NavItem>
             </>
           )}
+          <NavItem>
+              <ThemeToggle />
+            </NavItem>
         </Nav>
       </Collapse>
     </Navbar>
