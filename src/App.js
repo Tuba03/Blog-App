@@ -15,18 +15,15 @@ import Profileinfo from './components/pages/user-routes/Profileinfo';
 import NewFeed from './components/NewFeed';
 
 import Settings from './components/pages/Settings';
-// import ForgotPassword from './components/ForgotPassword';
 import ForgotPassword from './components/ForgotPassword';
 import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
-// import { ToastContainer } from 'react-toastify';
-// import "react-toastify/dist/ReactToastify.css";
 import './styles/light.css';
 import './styles/dark.css';
 
 const AppContent = () => {
   const { theme } = useTheme();
-// Sample user and posts data
+
 
   return (
     <div className={`app-container ${theme}-theme`}>

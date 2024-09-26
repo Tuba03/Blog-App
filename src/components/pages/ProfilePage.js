@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import ProfileHeader from './ProfileHeader'; // Adjust the path as necessary
-import ProfileContent from './ProfileContent'; // Adjust the path as necessary
+import ProfileHeader from './ProfileHeader'; 
+import ProfileContent from './ProfileContent';
 
 const ProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -14,17 +14,17 @@ const ProfilePage = () => {
       const authToken = localStorage.getItem("authToken");
 
       try {
+        console.log("Fetching user data..."); // Debug log
         const userResponse = await axios.get('http://100.28.49.102:9090/api/users/', {
           headers: {
             'Authorization': `Bearer ${authToken}`,
           }
         });
 
-        // Create a new user object
         const transformedUser = {
           picture: userResponse.data.profilepic ?? 'https://via.placeholder.com/150',
           name: userResponse.data.name,
-          bio: user.about ?? '', // Replace with dynamic bio if available
+          bio: userResponse.data.about ?? '', 
           postsCount: userResponse.data.totalPosts,
           followersCount: userResponse.data.followersCount ?? 0,
           followingCount: userResponse.data.followingCount ?? 0,
@@ -32,6 +32,7 @@ const ProfilePage = () => {
 
         setUser(transformedUser);
 
+        console.log("Fetching posts data..."); // Debug log
         const postsResponse = await axios.get('http://100.28.49.102:9090/api/users/posts/', {
           headers: {
             'Authorization': `Bearer ${authToken}`,
