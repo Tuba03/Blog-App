@@ -1,0 +1,73 @@
+/* Global Styles for Article Preview Page */
+.article-preview {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: var(--article-text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Alternate Background Colors */
+.article-preview:nth-child(odd) {
+    background-color: var(--article-bg-color-odd);
+}
+
+.article-preview:nth-child(even) {
+    background-color: var(--article-bg-color-even);
+}
+
+.article-preview img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 15px;
+}
+
+.article-preview h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.article-preview p {
+    font-size: 14px;
+    color: var(--article-excerpt-color);
+}
+
+/* Dark Theme */
+body.dark-theme .article-preview {
+    color: #E0E0E0;
+}
+
+body.dark-theme .article-preview:nth-child(odd) {
+    background-color: #1E1E1E; /* Dark grey for odd articles */
+}
+
+body.dark-theme .article-preview:nth-child(even) {
+    background-color: #2C2C2C; /* Slightly lighter grey for even articles */
+}
+
+body.dark-theme .article-preview p {
+    color: #B0B0B0; /* Slightly lighter text for excerpts */
+}
+
+/* Light Theme */
+body.light-theme .article-preview {
+    color: #000000;
+}
+
+body.light-theme .article-preview:nth-child(odd) {
+    background-color: #FFFFFF; /* White for odd articles */
+}
+
+body.light-theme .article-preview:nth-child(even) {
+    background-color: #F0F0F0; /* Light grey for even articles */
+}
+
+body.light-theme .article-preview p {
+    color: #333333; /* Slightly darker text for excerpts */
+}

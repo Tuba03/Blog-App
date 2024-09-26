@@ -1,0 +1,44 @@
+/* src/styles/dark.css  for login and card styling*/
+
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+body.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+.app-container.dark-theme {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+
+body.dark-theme {
+    background-color: #121212; 
+    color: #E0E0E0; 
+}
+
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-card {
+    background-color: #1E1E1E;  
+    color: #E0E0E0;  
+
+}
+
+.form-input.dark-theme {
+    border: 1px solid #333333;  
+    background-color: #2C2C2C;  
+    color: #E0E0E0; 
+}
+
+button.dark-theme {
+    background-color: #0095F6;  
+    color: #FFFFFF;  
+}

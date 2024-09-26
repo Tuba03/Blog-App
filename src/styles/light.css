@@ -1,0 +1,48 @@
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body.light-theme {
+    background-color: #F0F2F5;
+    color: #000000; 
+}
+
+.app-container {
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+}
+
+.login-card {
+    background-color: #FFFFFF; 
+} 
+.login-card.light-theme {
+    background-color: #FFFFFF; 
+    color: #000000;
+}
+
+.form-input.light-theme {
+    border: 1px solid #CCCCCC; 
+    background-color: #FFFFFF; 
+    color: #000000; 
+}
+
+button.light-theme {
+    background-color: #0095F6;  
+    color: #FFFFFF;  
+}
+
+/* for all app styling */
+body.light-theme {
+    background-color: #f0f2f5;
+    color: #000000;
+}
+
+
+.app-container.light-theme {
+    background-color: #f0f2f5;
+    color: #000000;
+}
+

@@ -1,0 +1,21 @@
+/* src/components/ProfileContent.css */
+.profile-content {
+  padding: 20px;
+}
+
+.post {
+  margin-bottom: 20px;
+}
+
+.post h2 {
+  font-size: 22px;
+  margin: 0 0 10px 0;
+}
+
+.post p {
+  color: #666;
+}
+
+.read-more {
+  color: #007bff;
+}

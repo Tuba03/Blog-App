@@ -1,0 +1,56 @@
+/* src/components/ProfileHeader.css */
+.profile-header {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-picture img {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.profile-details {
+  margin-left: 20px;
+}
+
+.profile-details h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.bio {
+  color: #555;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.profile-stats {
+  display: flex;
+  gap: 20px;
+  color: #777;
+}
+
+
+ /* src/components/ProfileHeader.css */
+/* .profile-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 20px;
+}
+
+.dropdown-button {
+background: none;
+border: none;
+color: #007bff;
+cursor: pointer;
+padding: 0;
+}
+
+.dropdown-button:hover {
+text-decoration: underline;
+} */

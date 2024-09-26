@@ -1,0 +1,22 @@
+/* src/pages/SettingsPage.css */
+.settings-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
