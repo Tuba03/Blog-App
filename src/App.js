@@ -16,7 +16,6 @@ import NewFeed from './components/NewFeed';
 
 import Settings from './components/pages/Settings';
 import ForgotPassword from './components/ForgotPassword';
-import ThemeToggle from './components/ThemeToggle';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 import './styles/light.css';
 import './styles/dark.css';
@@ -24,10 +23,8 @@ import './styles/dark.css';
 const AppContent = () => {
   const { theme } = useTheme();
 
-
   return (
     <div className={`app-container ${theme}-theme`}>
-      <ThemeToggle />
       <Routes>
         <Route path="/" element={<Base />} />
         <Route path="/Home" element={<Home />} />
