@@ -1,4 +1,3 @@
-// src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AuthContext = createContext();
@@ -7,7 +6,6 @@ export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    // Check if the token exists in local storage
     const token = localStorage.getItem('authToken');
     if (token) {
       setIsLoggedIn(true);
@@ -19,9 +17,23 @@ export const AuthProvider = ({ children }) => {
     // Optionally save token to local storage
   };
 
-  const logout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem('authToken'); // Remove token on logout
+  const logout = async () => {
+    const token = localStorage.getItem('authToken');
+
+    try {
+      await fetch('http://100.28.49.102:9090/api/v1/auth/logout', {
+        method: 'POST',
+        headers: {
+          'accept': '*/*',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      setIsLoggedIn(false);
+      localStorage.removeItem('authToken'); // Remove token on logout
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
   };
 
   return (
